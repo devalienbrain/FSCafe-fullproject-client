@@ -7,7 +7,7 @@ import dessertImg from "../../../../public/Resources/menu/dessert-bg.jpeg";
 import useMenu from "../../../hooks/useMenu";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import MenuCategory from "../MenuCategory/MenuCategory";
-import Cover from "../../shared/Cover/Cover";
+import Cover from "../../Shared/Cover/Cover";
 
 const Menu = () => {
   const [menu] = useMenu();
