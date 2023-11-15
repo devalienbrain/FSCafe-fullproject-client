@@ -86,16 +86,21 @@ const Navbar = () => {
         <a className="px-7 py-3 uppercase bg-black text-white font-semibold text-sm shadow-lg hover:shadow-2xl">
           Join with us
         </a>
-        <div className="px-2 py-1 rounded-2xl bg-blue-400">
+        <div
+          onClick={toggleTheme}
+          className={`px-2 py-1 rounded-2xl border ${
+            theme === "light"
+              ? "bg-black border-white"
+              : "bg-white border-black"
+          }`}
+        >
           <div
-            onClick={toggleTheme}
-            className={`mr-2 rounded-full shadow-2xl w-4 h-4 text-xs bg-black ${
+            className={`mr-3 rounded-full shadow-2xl w-5 h-5 bg-black ${
               theme === "light" ? "hidden" : ""
             }`}
           ></div>
           <div
-            onClick={toggleTheme}
-            className={`ml-2 rounded-full shadow-2xl w-4 h-4 text-xs bg-white ${
+            className={`ml-3 rounded-full shadow-2xl w-5 h-5 bg-white ${
               theme === "dark" ? "hidden" : ""
             }`}
           ></div>
