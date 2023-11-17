@@ -1,9 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiSun } from "react-icons/fi";
 import { MdDarkMode } from "react-icons/md";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut();
+  };
   const navOptions = (
     <>
       <li>
@@ -16,7 +21,11 @@ const Navbar = () => {
         <Link to="/order">Order Food</Link>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        {user ? (
+          <button onClick={handleLogOut}>Log Out</button>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
       </li>
     </>
   );
@@ -51,7 +60,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="navbar fixed z-10 bg-opacity-20 bg-black text-yellow-700 container mx-auto">
+    <div className="navbar fixed z-10 bg-opacity-20 bg-black text-red-600 font-semibold container mx-auto">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -83,6 +92,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
       <div className="navbar-end">
+        <div className="px-3 text-xs">{user ? user?.displayName : ""}</div>
         <a className="px-7 py-3 uppercase  text-white font-semibold text-sm shadow-lg hover:shadow-2xl mr-3">
           Join with us
         </a>

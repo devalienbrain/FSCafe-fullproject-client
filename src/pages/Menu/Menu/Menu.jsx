@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import menuImg from "../../../../public/Resources/menu/menu-bg.png";
+import menuImg from "../../../../public/Resources/menu/banner3.jpg";
 import soupImg from "../../../../public/Resources/menu/soup-bg.jpg";
 import saladImg from "../../../../public/Resources/menu/salad-bg.jpg";
 import pizzaImg from "../../../../public/Resources/menu/pizza-bg.jpg";
