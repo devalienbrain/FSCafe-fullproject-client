@@ -83,15 +83,13 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
       <div className="navbar-end">
-        <a className="px-7 py-3 uppercase bg-black text-white font-semibold text-sm shadow-lg hover:shadow-2xl">
+        <a className="px-7 py-3 uppercase  text-white font-semibold text-sm shadow-lg hover:shadow-2xl mr-3">
           Join with us
         </a>
         <div
           onClick={toggleTheme}
-          className={`px-2 py-1 rounded-2xl border ${
-            theme === "light"
-              ? "bg-black border-white"
-              : "bg-white border-black"
+          className={`px-2 py-1 rounded-2xl ${
+            theme === "light" ? "bg-black" : "bg-white"
           }`}
         >
           <div
