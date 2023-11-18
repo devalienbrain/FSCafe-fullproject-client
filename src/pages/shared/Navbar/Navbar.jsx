@@ -29,12 +29,7 @@ const Navbar = () => {
       </li>
       <li>
         {user ? (
-          <div className="flex justify-center items-center">
-            {" "}
-            <div className="font-black">My Cart: {cart.length}</div>
-            <FaCartPlus />
-            <button onClick={handleLogOut}>Log out</button>
-          </div>
+          <button onClick={handleLogOut}>Log out</button>
         ) : (
           <Link to="/login">Login</Link>
         )}
@@ -99,23 +94,6 @@ const Navbar = () => {
           </ul>
         </div>
         <a className="btn btn-ghost normal-case text-2xl font-bold">FSCafe</a>
-        <div
-          onClick={toggleTheme}
-          className={`px-2 py-1 rounded-2xl ${
-            theme === "light" ? "bg-black" : "bg-white"
-          }`}
-        >
-          <div
-            className={`mr-3 rounded-full shadow-2xl w-5 h-5 bg-black ${
-              theme === "light" ? "hidden" : ""
-            }`}
-          ></div>
-          <div
-            className={`ml-3 rounded-full shadow-2xl w-5 h-5 bg-white ${
-              theme === "dark" ? "hidden" : ""
-            }`}
-          ></div>
-        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>
@@ -123,6 +101,10 @@ const Navbar = () => {
       <div className="navbar-end">
         {user ? (
           <div className="px-3 text-xs flex justify-center items-center gap-3">
+            <div className="font-black text-base">My Cart: {cart.length}</div>
+            <div className="text-lg">
+              <FaCartPlus />
+            </div>
             {user?.displayName}
             <img className="w-7 h-7 rounded-full" src={user?.photoURL} />
           </div>
@@ -131,6 +113,23 @@ const Navbar = () => {
             Join with us
           </p>
         )}
+        <div
+          onClick={toggleTheme}
+          className={`px-0 my-1 rounded-2xl ${
+            theme === "light" ? "bg-black" : "bg-white"
+          }`}
+        >
+          <div
+            className={`mr-3 rounded-full shadow-2xl w-3 h-3 bg-black ${
+              theme === "light" ? "hidden" : ""
+            }`}
+          ></div>
+          <div
+            className={`ml-3 rounded-full shadow-2xl w-3 h-3 bg-white ${
+              theme === "dark" ? "hidden" : ""
+            }`}
+          ></div>
+        </div>
       </div>
     </div>
   );
