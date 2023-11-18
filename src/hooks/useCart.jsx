@@ -9,12 +9,17 @@ const useCart = () => {
   const { refetch, data: cart = [] } = useQuery({
     queryKey: ["cart", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure
-        .get(`/cart?email=${user.email}`)
-        .then((res) => console.log(res.data));
-      return res.data;
+      try {
+        const res = await axiosSecure.get(`/cart?email=${user.email}`);
+        console.log(res.data); // Log the data inside the try block
+        return res.data;
+      } catch (error) {
+        console.error("Error fetching cart:", error);
+        throw error; // Rethrow the error to let React Query handle it
+      }
     },
   });
+
   return [cart, refetch];
 };
 

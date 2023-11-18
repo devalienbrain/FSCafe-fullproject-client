@@ -27,13 +27,7 @@ const Navbar = () => {
       <li>
         <Link to="/order">Order Food</Link>
       </li>
-      <li>
-        {user ? (
-          <button onClick={handleLogOut}>Log out</button>
-        ) : (
-          <Link to="/login">Login</Link>
-        )}
-      </li>
+      <li>{user ? "" : <Link to="/login">Login</Link>}</li>
     </>
   );
 
@@ -100,13 +94,20 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <div className="px-3 text-xs flex justify-center items-center gap-3">
-            <div className="font-black text-base">My Cart: {cart.length}</div>
-            <div className="text-lg">
-              <FaCartPlus />
+          <div className="px-3 text-xs flex justify-center items-center gap-7">
+            <div className="justify-start flex items-center gap-2">
+              <div className="text-3xl">
+                <FaCartPlus />
+              </div>
+              <div className="font-black">My cart: {cart.length}</div>
             </div>
-            {user?.displayName}
-            <img className="w-7 h-7 rounded-full" src={user?.photoURL} />
+            <div className="justify-end flex items-center gap-2">
+              <div className="text-right">
+                <p>{user?.displayName}</p>
+                <button onClick={handleLogOut}>Log out</button>
+              </div>
+              <img className="w-7 h-7 rounded-full" src={user?.photoURL} />
+            </div>
           </div>
         ) : (
           <p className="p-3  text-white font-semibold text-base shadow-lg hover:shadow-2xl mr-3">

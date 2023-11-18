@@ -14,9 +14,7 @@ const FoodCard = ({ item }) => {
     email: user.email,
   };
   const handleAddItemToCart = () => {
-    axiosSecure.post("/cart", {
-      cartItem,
-    });
+    axiosSecure.post("/cart", cartItem);
   };
 
   return (
