@@ -1,11 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiSun } from "react-icons/fi";
+import { FaCartPlus } from "react-icons/fa6";
 import { MdDarkMode } from "react-icons/md";
 import { AuthContext } from "../../../providers/AuthProvider";
+import useCart from "../../../hooks/useCart";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+
+  const [cart, refetch] = useCart();
   const handleLogOut = () => {
     logOut();
   };
@@ -25,7 +29,12 @@ const Navbar = () => {
       </li>
       <li>
         {user ? (
-          <button onClick={handleLogOut}>Log Out</button>
+          <div className="flex justify-center items-center">
+            {" "}
+            <div className="font-black">My Cart: {cart.length}</div>
+            <FaCartPlus />
+            <button onClick={handleLogOut}>Log out</button>
+          </div>
         ) : (
           <Link to="/login">Login</Link>
         )}
@@ -90,15 +99,6 @@ const Navbar = () => {
           </ul>
         </div>
         <a className="btn btn-ghost normal-case text-2xl font-bold">FSCafe</a>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navOptions}</ul>
-      </div>
-      <div className="navbar-end">
-        <div className="px-3 text-xs">{user ? user?.displayName : ""}</div>
-        <a className="px-7 py-3 uppercase  text-white font-semibold text-sm shadow-lg hover:shadow-2xl mr-3">
-          Join with us
-        </a>
         <div
           onClick={toggleTheme}
           className={`px-2 py-1 rounded-2xl ${
@@ -116,19 +116,21 @@ const Navbar = () => {
             }`}
           ></div>
         </div>
-        {/* <div>
-          {theme === "light" ? (
-            <MdDarkMode
-              onClick={toggleTheme}
-              className="ml-2 rounded-full w-5 h-5 text-xs"
-            ></MdDarkMode>
-          ) : (
-            <FiSun
-              onClick={toggleTheme}
-              className="ml-2 rounded-full w-5 h-5 text-xs"
-            ></FiSun>
-          )}
-        </div> */}
+      </div>
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+      </div>
+      <div className="navbar-end">
+        {user ? (
+          <div className="px-3 text-xs flex justify-center items-center gap-3">
+            {user?.displayName}
+            <img className="w-7 h-7 rounded-full" src={user?.photoURL} />
+          </div>
+        ) : (
+          <p className="p-3  text-white font-semibold text-base shadow-lg hover:shadow-2xl mr-3">
+            Join with us
+          </p>
+        )}
       </div>
     </div>
   );
