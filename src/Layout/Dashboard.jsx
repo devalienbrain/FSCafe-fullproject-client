@@ -13,6 +13,7 @@ import {
 import { NavLink, Outlet } from "react-router-dom";
 // import useCart from "../hooks/useCart";
 // import useAdmin from "../hooks/useAdmin";
+import Navbar from "../pages/shared/Navbar/Navbar";
 
 const Dashboard = () => {
   // const [cart] = useCart();
@@ -21,15 +22,19 @@ const Dashboard = () => {
   // const [isAdmin] = useAdmin();
 
   return (
-    <div className="flex">
-      {/* dashboard side bar */}
-      <div className="w-64 min-h-screen bg-lime-100 text-red-700 text-xl font-semibold">
-        <div className="p-8">
-          <p className="text-2xl font-black">FS Cafe</p>
-          <p className="italic text-sm">e a t f r e s h</p>
-        </div>
-        <ul className="menu p-4">
-          {/* {isAdmin ? (
+    <>
+      <div>
+        <Navbar></Navbar>
+      </div>
+      <div className="flex">
+        {/* dashboard side bar */}
+        <div className="w-64 min-h-screen bg-lime-100 text-red-700 text-xl font-semibold pt-20">
+          <div className="p-8">
+            <p className="text-2xl font-black">FS Cafe</p>
+            <p className="italic text-sm">e a t f r e s h</p>
+          </div>
+          <ul className="menu p-4">
+            {/* {isAdmin ? (
             <>
               <li>
                 <NavLink to="/dashboard/adminHome">
@@ -63,67 +68,68 @@ const Dashboard = () => {
               </li>
             </>
           ) : ( */}
-          <>
+            <>
+              <li>
+                <NavLink to="/dashboard/userHome">
+                  <FaHome></FaHome>
+                  <p className="hover:underline">User Home</p>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/reservation">
+                  <FaCalendar></FaCalendar>
+                  <p className="hover:underline">Reservation</p>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/cart">
+                  <FaShoppingCart></FaShoppingCart>
+                  <p className="hover:underline">My Cart</p>
+                  {/* ({cart.length}) */}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/review">
+                  <FaAd></FaAd>
+                  <p className="hover:underline">Add a Review</p>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/bookings">
+                  <FaList></FaList>
+                  <p className="hover:underline">My Bookings</p>
+                </NavLink>
+              </li>
+            </>
+            {/* )} */}
+            {/* shared nav links */}
+            <div className="divider"></div>
             <li>
-              <NavLink to="/dashboard/userHome">
+              <NavLink to="/">
                 <FaHome></FaHome>
-                <p className="hover:underline">User Home</p>
+                <p className="hover:underline">Home</p>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/reservation">
-                <FaCalendar></FaCalendar>
-                <p className="hover:underline">Reservation</p>
+              <NavLink to="/order/salad">
+                <FaSearch></FaSearch>
+                <p className="hover:underline">Menu</p>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/dashboard/cart">
-                <FaShoppingCart></FaShoppingCart>
-                <p className="hover:underline">My Cart</p>
-                {/* ({cart.length}) */}
+              <NavLink to="/order/contact">
+                <FaEnvelope></FaEnvelope>
+                <p className="hover:underline">Contact</p>
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/dashboard/review">
-                <FaAd></FaAd>
-                <p className="hover:underline">Add a Review</p>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard/bookings">
-                <FaList></FaList>
-                <p className="hover:underline">My Bookings</p>
-              </NavLink>
-            </li>
-          </>
-          {/* )} */}
-          {/* shared nav links */}
-          <div className="divider"></div>
-          <li>
-            <NavLink to="/">
-              <FaHome></FaHome>
-              <p className="hover:underline">Home</p>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/order/salad">
-              <FaSearch></FaSearch>
-              <p className="hover:underline">Menu</p>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/order/contact">
-              <FaEnvelope></FaEnvelope>
-              <p className="hover:underline">Contact</p>
-            </NavLink>
-          </li>
-        </ul>
+          </ul>
+        </div>
+        {/* dashboard content */}
+        <div className="flex-1 p-8">
+          <Outlet></Outlet>
+        </div>
       </div>
-      {/* dashboard content */}
-      <div className="flex-1 p-8">
-        <Outlet></Outlet>
-      </div>
-    </div>
+    </>
   );
 };
 

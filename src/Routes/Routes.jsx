@@ -8,6 +8,7 @@ import Order from "../pages/Order/Order/Order";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../Layout/Dashboard";
+import AllUsers from "../pages/dashboard/AllUsers/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -38,8 +39,15 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/dashboard",
+    path: "dashboard",
     element: <Dashboard></Dashboard>,
+    // errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "userHome",
+        element: <AllUsers></AllUsers>,
+      },
+    ],
   },
 ]);
 
