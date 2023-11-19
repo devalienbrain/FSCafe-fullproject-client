@@ -11,12 +11,12 @@ import {
   FaUtensils,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-// import useCart from "../hooks/useCart";
 // import useAdmin from "../hooks/useAdmin";
 import Navbar from "../pages/shared/Navbar/Navbar";
+import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
-  // const [cart] = useCart();
+  const [cart] = useCart();
 
   // // TODO: get isAdmin value from the database
   // const [isAdmin] = useAdmin();
