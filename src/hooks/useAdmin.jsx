@@ -7,14 +7,16 @@ const useAdmin = () => {
   const axiosSecure = useAxiosSecure();
 
   // Using tanstack query
-  // const {} = useQuery({
-  //   queryKey: [user?.email, "isAdmin"],
-  //   queryFn: async () => {
-  //     const res = await axiosSecure.get
-  //   }
-  // });
+  const { data: isAdmin, isPending: isAdminLoading } = useQuery({
+    queryKey: [user?.email, "isAdmin"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/admin/${user.email}`);
+      console.log(res.data);
+      return res.data?.admin;
+    },
+  });
 
-  return <div></div>;
+  return [isAdmin, isAdminLoading];
 };
 
 export default useAdmin;
