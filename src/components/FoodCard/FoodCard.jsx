@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
@@ -14,7 +15,16 @@ const FoodCard = ({ item }) => {
     email: user?.email,
   };
   const handleAddItemToCart = () => {
-    axiosSecure.post("/cart", cartItem);
+    axiosSecure.post("/cart", cartItem).then((res) => {
+      console.log(res.data);
+      if (res.data.insertedId) {
+        Swal.fire({
+          title: "Great!",
+          html: "Item added to cart.",
+          timer: 1000,
+        });
+      }
+    });
   };
 
   return (
