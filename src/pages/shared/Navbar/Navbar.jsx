@@ -5,9 +5,11 @@ import { FaCartPlus } from "react-icons/fa6";
 import { MdDarkMode } from "react-icons/md";
 import { AuthContext } from "../../../providers/AuthProvider";
 import useCart from "../../../hooks/useCart";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
 
   const [cart, refetch] = useCart();
   const handleLogOut = () => {
@@ -16,7 +18,12 @@ const Navbar = () => {
   const navOptions = (
     <>
       <li>
-        <Link to="/dashboard">Dashboard</Link>
+        {user && isAdmin && (
+          <Link to="/dashboard/adminHome">Admin Dashboard</Link>
+        )}
+        {user && !isAdmin && (
+          <Link to="/dashboard/userHome">User Dashboard</Link>
+        )}
       </li>
       <li>
         <Link to="/">Home</Link>
@@ -25,7 +32,7 @@ const Navbar = () => {
         <Link to="/menu">Our Menu</Link>
       </li>
       <li>
-        <Link to="/order">Order Food</Link>
+        <Link to="/order/salad">Order Food</Link>
       </li>
       <li>{user ? "" : <Link to="/login">Login</Link>}</li>
     </>
@@ -110,9 +117,11 @@ const Navbar = () => {
             </div>
           </div>
         ) : (
-          <p className="p-3  text-white font-semibold text-base shadow-lg hover:shadow-2xl mr-3">
-            Join with us
-          </p>
+          <Link to="/signup">
+            <p className="p-3  text-white font-semibold text-base shadow-lg hover:shadow-2xl mr-3">
+              Join with us
+            </p>
+          </Link>
         )}
         <div
           onClick={toggleTheme}

@@ -11,7 +11,7 @@ const FoodCard = ({ item }) => {
     image,
     price,
     recipe,
-    email: user.email,
+    email: user?.email,
   };
   const handleAddItemToCart = () => {
     axiosSecure.post("/cart", cartItem);

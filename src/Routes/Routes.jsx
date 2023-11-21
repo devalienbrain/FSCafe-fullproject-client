@@ -10,6 +10,8 @@ import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../Layout/Dashboard";
 import AllUsers from "../pages/dashboard/AllUsers/AllUsers";
 import MyCart from "../pages/dashboard/MyCart/MyCart";
+import UserHome from "../pages/dashboard/UserHome/UserHome";
+import AdminHome from "../pages/dashboard/AdminHome/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +28,7 @@ const router = createBrowserRouter([
         element: <Menu></Menu>,
       },
       {
-        path: "/order",
+        path: "/order/:category",
         element: <Order></Order>,
       },
       {
@@ -42,11 +44,14 @@ const router = createBrowserRouter([
   {
     path: "dashboard",
     element: <Dashboard></Dashboard>,
-    // errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "userHome",
-        element: <AllUsers></AllUsers>,
+        element: <UserHome></UserHome>,
+      },
+      {
+        path: "adminHome",
+        element: <AdminHome></AdminHome>,
       },
       {
         path: "cart",
