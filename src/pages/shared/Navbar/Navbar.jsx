@@ -1,15 +1,16 @@
-import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FiSun } from "react-icons/fi";
 import { FaCartPlus } from "react-icons/fa6";
-import { MdDarkMode } from "react-icons/md";
 import { AuthContext } from "../../../providers/AuthProvider";
 import useCart from "../../../hooks/useCart";
 import useAdmin from "../../../hooks/useAdmin";
+import useTheme from "../../../hooks/useTheme";
+import { useContext } from "react";
+import ThemeToggle from "../../../components/ThemeToggle";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isAdmin] = useAdmin();
+  const [toggleTheme, theme] = useTheme();
 
   const [cart, refetch] = useCart();
   const handleLogOut = () => {
@@ -38,35 +39,6 @@ const Navbar = () => {
     </>
   );
 
-  const [theme, setTheme] = useState("dark");
-
-  const toggleTheme = () => {
-    const html = document.documentElement;
-    if (theme === "light") {
-      html.setAttribute("data-theme", "dark");
-      html.classList.remove("light");
-      html.classList.add("dark");
-      setTheme("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      html.setAttribute("data-theme", "light");
-      html.classList.remove("dark");
-      html.classList.add("light");
-      setTheme("light");
-      localStorage.setItem("theme", "light");
-    }
-    // console.log("Previous Theme:", theme);
-  };
-
-  useEffect(() => {
-    const localStorageTheme = localStorage.getItem("theme") || "light";
-    setTheme(localStorageTheme);
-    const html = document.documentElement;
-    html.setAttribute("data-theme", localStorageTheme);
-    html.classList.add(localStorageTheme);
-    // console.log("Local Storage Theme:", localStorageTheme);
-  }, []);
-
   return (
     <div className="navbar fixed z-10 bg-opacity-20 bg-black text-red-600 font-semibold container mx-auto">
       <div className="navbar-start">
@@ -94,6 +66,7 @@ const Navbar = () => {
             {navOptions}
           </ul>
         </div>
+        <ThemeToggle></ThemeToggle>
         <a className="btn btn-ghost normal-case text-2xl font-bold">FSCafe</a>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -123,23 +96,6 @@ const Navbar = () => {
             </p>
           </Link>
         )}
-        <div
-          onClick={toggleTheme}
-          className={`px-0 my-1 rounded-2xl ${
-            theme === "light" ? "bg-black" : "bg-white"
-          }`}
-        >
-          <div
-            className={`mr-3 rounded-full shadow-2xl w-3 h-3 bg-black ${
-              theme === "light" ? "hidden" : ""
-            }`}
-          ></div>
-          <div
-            className={`ml-3 rounded-full shadow-2xl w-3 h-3 bg-white ${
-              theme === "dark" ? "hidden" : ""
-            }`}
-          ></div>
-        </div>
       </div>
     </div>
   );

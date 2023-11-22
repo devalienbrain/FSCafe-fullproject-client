@@ -13,6 +13,7 @@ import {
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 import useCart from "../hooks/useCart";
+import ThemeToggle from "../components/ThemeToggle";
 
 const Dashboard = () => {
   const [cart] = useCart();
@@ -25,7 +26,11 @@ const Dashboard = () => {
       <div className="flex">
         {/* dashboard side bar */}
         <div className="w-64 min-h-screen bg-lime-100 text-red-700 text-xl font-semibold pt-20">
+          <div className="text-left"></div>
           <div className="p-8">
+            <div className="flex justify-sart">
+              <ThemeToggle></ThemeToggle>
+            </div>
             <p className="text-2xl font-black">FS Cafe</p>
             <p className="italic text-sm">e a t f r e s h</p>
           </div>
